@@ -1,12 +1,13 @@
 package model;
 
+import dao.EntidadeBase;
 import model.Professor;
 
 import javax.persistence.*;
 
 @Table(name = "aluno")
 @Entity
-public class Aluno {
+public class Aluno implements EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

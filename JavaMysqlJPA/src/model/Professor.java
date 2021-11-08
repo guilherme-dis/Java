@@ -1,12 +1,14 @@
 package model;
 
+import dao.EntidadeBase;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Professor {
+public class Professor implements EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -35,6 +37,7 @@ public class Professor {
                 '}';
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
