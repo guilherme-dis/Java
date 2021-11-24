@@ -1,0 +1,32 @@
+o que é profiles?
+
+cada estágio do projeto usamos um properties
+
+cada ambiente vai ter suas configurações próprias
+Diversar  configurações simples.
+fica ali dentro de resources
+resources
+|-application.properties			(tipoes de coneções diferentes, etc, intancias diferentes)
+|-application-dev.properties
+|-application-release.properties
+
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+public class Pessoa{
+
+    private Long id;
+    private String nome;
+    private String email;
+    private String senha;
+
+}
+
+
+existe variáveis de ambiente, para que quando passar pela linha de comando para 
+iniciar o projeto, já fale qual é a properties, desenvolvimento/produção
+, seria algo do tipo abaixo, que no caso é da porta, mas tem que pesquisar
+mvn spring-boot::run -Dserver.port=8085
