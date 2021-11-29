@@ -1,0 +1,9 @@
+GET http://localhost:8080/users/page?page=1
+###
+GET http://localhost:8080/users/page?page=1&size=12
+###
+GET http://localhost:8080/users/page?page=0&size=5&sort=name,desc
+###
+GET http://localhost:8080/users/page?page=0&size=5&sort=name,desc
+###
+GET http://localhost:8080/users/search-name?name=maria
