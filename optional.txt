@@ -1,0 +1,23 @@
+Optional
+
+String s = "1d";
+
+       	Optional<Integer>numero=converter(s);				//Recebe o Optional que vem da função
+       	numero.ifPresent(System.out::println);				//Se tiver algo dentro do Optional, printa ele
+       	converter(s).ifPresent(System.out::println);			//se tiver algo dentro, executa uma função converter(s).ifPresent( n ->{Integer v=n*2;});
+       	System.out.println(converter(s).orElse(2));			//o orelse é um valor default
+       	System.out.println(converter(s).orElseGet(() -> {return outraoperação();}));	//se não tiver nada presente, executa a função lambda
+       	System.out.println(converter(s).orElseThrow(NullPointerException::new));		//se não tiver nada, lança a exeção
+       	System.out.println(numero.isPresent());
+	Stream.of(1,2,3).findFirst().ifPresent(System.out::println);
+    }
+
+
+    public static Optional<Integer> converter(String n) {
+        try {
+            return Optional.of(Integer.valueOf(n));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+
+    }
