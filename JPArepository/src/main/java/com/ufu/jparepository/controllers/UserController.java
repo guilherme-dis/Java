@@ -2,28 +2,22 @@ package com.ufu.jparepository.controllers;
 
 import com.ufu.jparepository.entities.User;
 import com.ufu.jparepository.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value="/users")
+@AllArgsConstructor
 public class UserController {
-    private final UserRepository repository;
 
-    public UserController(UserRepository repository) {
-        this.repository = repository;
-    }
+    private final UserRepository repository;
 
     @GetMapping(value = "/page")
     public ResponseEntity<Page<User>>findAll(Pageable pageable){
+        System.out.println("findAll");
         Page<User>result=repository.findAll(pageable);
         return ResponseEntity.ok(result);
     }
@@ -33,9 +27,12 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping(value = "/search-name")
+    @PostMapping(value = "/search-name")
     public ResponseEntity<Page<User>> searchByName(@RequestParam(defaultValue = "") String name, Pageable pageable) {
         Page<User> result = repository.findByNameContainingIgnoreCase(name, pageable);
+        if(result.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(result);
     }
 
